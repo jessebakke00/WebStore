@@ -1,0 +1,68 @@
+{% extends 'Store/main.html' %}
+
+{% block content %}
+<style type="text/css">
+  /*.col-lg-6{
+    width:   50%;
+    margin:  auto;
+    padding: 10px;
+    border:  1px solid black; 
+  }
+  
+  .add-btn{
+    border: 1px solid #4f868c;
+    color: #4f868c    
+  }
+  
+  .big-thumbnail{
+    height: 400px;
+    padding: 10px;
+    border: 1px solid black;
+  }
+  
+  .name{
+    display: block;
+    position: relative;
+    padding: 5px;
+    border: 1px solid black;
+  }
+  
+  .name{
+    float: left;
+    display: inline;
+  }
+  
+  .price{
+    float: right;
+    
+  }
+  
+  .description{
+    
+  }*/
+  .add-btn:hover{
+    color: #fffff;
+    background-color:green;
+    border: 1px solid #ffffff;
+  }
+  
+</style>
+
+<div class="col-lg-6" style="box-shadow:hsl(0, 0%, 80%) 0 0 16px;width: 50%;margin: auto;padding: 10px;margin-top:20px;">
+  <a href="/" class="btn btn-outline-success add-btn" style="margin:5px">Back</a>
+  <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-success add-btn update-cart" style="margin:5px;float:right;">Add to Cart</button>
+  <img class="thumbnail big-thumbnail" style="height: 400px;padding: 10px;" src="{{ product.image.url }}">
+  <div class="name-div" style="display: block; padding: 5px;">
+    <p>
+      <span class="name" style="float: left;font-size: large;"><strong>{{ product.name }}</strong></span>
+      <span class="price" style="float: right;font-size:large;"><strong>${{ product.price }}</strong></span>
+    </p>
+    <br>
+  </div>
+  <div class="description" style="padding: 5px;display: block;">
+    <p style="text-align: left;font-size: small;">{{ product.description }}</P>
+  </div>
+</div>
+
+{% endblock %}
+

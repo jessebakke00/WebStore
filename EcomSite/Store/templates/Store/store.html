@@ -1,0 +1,32 @@
+{% extends 'Store/main.html' %}
+{% load static %}
+{% block script %}
+<script type="text/javascript">
+    var user = "{{ user }}";
+</script>
+{% endblock %}
+
+
+{% block overlay %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-4">
+        <img title="{{ product.description }}" class="thumbnail" src="{{ product.image.url }}" >
+        <div class="box-element product">
+            <h6><strong>{{ product.name }}</strong></h6>
+            <br>
+            <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            <a href="/description/{{ product.id }}/" class="btn btn-outline-success view-btn">View</a>
+            <!--<button class="btn btn-outline-success view-btn" id="opener">View</button>-->
+            
+            
+            <h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
+        </div>
+    </div>
+    {% endfor %} 
+       
+</div>
+
+{% endblock %}

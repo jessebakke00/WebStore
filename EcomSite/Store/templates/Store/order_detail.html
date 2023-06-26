@@ -1,0 +1,156 @@
+{% extends 'Store/main.html' %}
+
+{% block admin_items %}
+<li class="nav-item active">
+  <a class="nav-link" href="/current_orders/">Back</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="bg-dark second-div second-container">
+          <table class="main-table">
+            <th>
+              
+            </th>
+            <tr class="main-table-row">
+              <td class="main-table-td-left">
+                <strong>Order Number:</strong>
+              </td>
+              <td class="main-table-td-right">
+                {{ shipping_address.order }}  
+              </td>
+              <td>
+                
+                <button style="display:inline;" class="btn btn-warning {{ shipping_address.order.css_class }}" id="update-shipped-status">{{ shipping_address.order.status }}</button>
+              </td>
+              <td>
+                <button style="display: inline;" class="btn btn-warning" id="delete-order">Delete</button>
+                <!--<button class="btn btn-warning" id="update-shipped-status">Click to Unship Order</button>-->
+                
+              </td>
+            </tr>
+            <tr>
+              <td class="main-table-td-left">
+                <strong>Customer Name:</strong>
+              </td>
+              <td class="main-table-td-right">
+                {{ shipping_address.customer.name }}    
+              </td>
+              <td>
+                
+              </td>
+            </tr>
+            <tr>
+              <td class="main-table-td-left">
+              <strong>Customer Email:</strong>    
+              </td>
+              <td class="main-table-td-right">
+                {{ shipping_address.customer.email }}    
+              </td>
+              <td>
+                
+              </td>
+            </tr>
+          </table>
+  </div>
+  <div class="box-element"">
+    <div class="second-div">
+      <div class="third-div">
+      <table class="skinny-table">
+        <thead>
+          <h4 class="small-head">Shipping Details</h4>
+        </thead>
+        <tr class="main-table-row">
+          <td class="main-table-td">
+          <p class="dark"><strong>Address:</strong>{{ shipping_address.address }}</p>
+          <hr>
+            <p class="dark"><strong>City:</strong>{{ shipping_address.city}}</p>
+          <hr>
+            <p class="dark"><strong>State:</strong>{{ shipping_address.state }}</p>
+            <hr>
+            <p class="dark"><strong>Zipcode:</strong>{{ shipping_address.zipcode }}</p>
+          </td>
+        </tr>
+        
+      </table>
+      </div>
+      <div class="third-div">
+      
+      <table class="skinny-table">
+        <thead>
+          <h4 class="small-head">Order Details</h4>
+        </thead>
+        
+          <tr>
+            <td class="p-info">
+              <p class="dark"><strong>Product </strong></p>
+            </td>
+            <td class="p-info">
+              <p class="dark"><strong>Quantity</strong></p>
+            </td>
+          </tr>
+            {% for item in order_items %}
+          <tr>
+          <td class="p-info">
+            <p class="dark">{{ item.product }}</p>
+            
+          </td>
+          <td class="p-info">
+            <!--<strong>Price:  </strong><p class="dark">{{ item.price}}</p>-->
+          
+            <p class="dark">{{ item.quantity }}</p>
+            
+          </td>
+          </tr>    
+            {% endfor %}
+        
+        
+      </table>
+      
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var delBtn = document.getElementById('delete-order');
+  delBtn.addEventListener('click', function() {
+    var url = '/delete/';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'X_CSRFToken':csrftoken,
+      },
+      body: JSON.stringify({'orderNumber':"{{ shipping_address.order }}"})
+    })
+    .then((response) => {
+      console.log('order number');
+      return response.json();
+    })
+    .then((data) => {
+      window.location = '/current_orders/';
+    });
+  });
+  var shipBtn = document.getElementById('update-shipped-status');
+  shipBtn.addEventListener('click', function(){
+    var url = '/update_shipped_status/';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'X_CSRFToken': csrftoken,
+      },
+      body: JSON.stringify({'orderNumber':"{{ shipping_address.order }}"})
+    })
+      .then((response) => {
+        console.log('order number');
+        return response.json();
+        })
+      .then((data) => {
+          location.reload();
+        })
+    });
+</script>
+
+{% endblock %}
