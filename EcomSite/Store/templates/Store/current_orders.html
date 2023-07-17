@@ -1,0 +1,26 @@
+{% extends 'Store/main.html' %}
+
+{% block admin_items %}{% endblock %}
+
+{% block content %}
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+  <div class="container main-container">
+    {% regroup order_items by order as items_list %}
+   
+    {% for item in items_list %}
+    {% if item.grouper.transaction_id != None %}
+    <div class="box-element item-container">
+      
+        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link order-head" href="/order/{{  item.grouper }}/">Order# {{ item.grouper }}</a>
+            </li>
+          </ul>
+        
+        </div>
+      </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

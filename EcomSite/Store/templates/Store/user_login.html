@@ -1,0 +1,23 @@
+{% extends "Store/main.html" %}
+
+{% block login_link %}
+
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+  <div class="form-container">
+    <h4 class="small-head">Login</h4>
+    
+    <form method="post" action="">{% csrf_token %}
+      <p>Username: {{ form.username }}</p>
+      <p>Password: {{ form.password }}</p>
+      <p><input class="submit" type="submit" name="login"></p>
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </form>
+    <p class="signup">Not Signed Up? Click <a href="/create_user/">Here</a> to Sign Up</p>
+  </div>
+</div>
+{% endblock %}

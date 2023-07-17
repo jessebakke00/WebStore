@@ -1,0 +1,25 @@
+{% extends 'Store/main.html' %}
+
+{% block login_link %}{% endblock %}
+{% block content %}
+<link type="text/css" rel="stylesheet" href="/static/css/login.css"></link>
+<div class="container form-container">
+  <h1 class="main-head bg-dark" style="color:#efefef"Register</h1>
+  <p class="headline">Please complete the form to create an account</p>
+  <hr>
+  <form method="post" action="">{% csrf_token %}
+  <table class="form-table">
+  {{ form }}
+  <tr>
+    <td>
+      <button type="submit">OK</button>
+    </td>
+  </tr>
+  
+  </table>
+  </form>
+    
+  
+
+</div>
+{% endblock %}    
