@@ -8,7 +8,8 @@ from . import views
 admin.autodiscover()
 
 urlpatterns = [    
-    path('', views.store, name='store'),
+    path('', views.landing, name='landing'),
+    path('store/', views.store, name='store'),
     path('category/<str:category>/', views.category_items, name='category_items'),
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
@@ -30,5 +31,4 @@ urlpatterns = [
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     
     
-]
-#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

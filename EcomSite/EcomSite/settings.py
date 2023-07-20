@@ -21,9 +21,53 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['paypal.com','192.168.1.128', '192.168.1.63', '127.0.0.1', 'localhost']
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_SSL_HOST = 'www.insanitees.us'
+#SECURE_SSL_REDIRECT = True
+
+SECURE_HSTS_SECONDS = 2_592_000
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+ALLOWED_HOSTS = [
+    'https://insanitees.us',
+    'https://www.insanitees.us',
+    '172.31.22.76',
+    'insanitees.us',
+    'www.insanitees.us',
+    '*.insanitees.us',
+    '52.13.24.146',
+    'paypal.com',
+    '192.168.1.128',
+    '192.168.1.63',
+    '127.0.0.1',
+    'localhost',
+]
+
+CSFR_TRUSTED_ORIGINS = [
+    'https://www.insanitees.us',
+    'https://*.insanitees.us',
+    'https://insanitees.us',
+    '*.insanitees.us',
+]
+
+CSFR_ALLOWED_ORIGINS = [
+    'https://insanitees.us',
+    'https://www.insanitees.us',
+    '*.insanitees.us',
+]
+
+CORS_ORIGINS_WHITELIST = [
+    'https://insanitees.us',
+    'https://www.insanitees.us',
+    '*.insanitees.us',
+]
+
+
 
 # Application definition
 
@@ -47,6 +91,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
+
+#CSP_STYLE_SRC = ["'self'", "cdn.jsdelivr.net"]
 ROOT_URLCONF = 'EcomSite.urls'
 
 TEMPLATES = [
@@ -111,17 +158,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATIC_ROOT = '/var/www/EcomSite/static'
 
 STATICFILES_DIRS = [
-    '/home/jesse/WebStore/EcomSite/Store/static',
+    '/home/ubuntu/WebStore/EcomSite/Store/static',
 ]
 
 # Media files (user uploaded)
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 MEDIA_ROOT = '/var/www/EcomSite/media/'
 

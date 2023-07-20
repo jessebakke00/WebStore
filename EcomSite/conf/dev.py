@@ -13,7 +13,7 @@ loglevel = "debug"
 workers = 2
 
 # Bind to all ip addresses on port 8000
-bind = "0.0.0.0:8001"
+bind = "0.0.0.0:8000"
 
 # Reload when any file is changed
 reload = True
@@ -22,7 +22,7 @@ reload = True
 access_log = error_log = "/var/log/gunicorn/dev2.log"
 
 # Redirect stderr/stdout to the log file
-capture_output = True
+capture_output = False
 
 # The location of our pid file
 pidfile = "/var/run/gunicorn/dev.pid"
